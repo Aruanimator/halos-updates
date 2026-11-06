@@ -1,0 +1,10 @@
+{
+  "version": "1.4.0",
+  "date": "2026-11-06",
+  "notes": ["First Halos release"],
+  "win": { "url": "", "size": 0 },
+  "mac": { "url": "", "size": 0 },
+  "history": [
+    { "version": "1.4.0", "date": "2026-11-06", "notes": ["First Halos release"] }
+  ]
+}

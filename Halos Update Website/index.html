@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Halos Updates</title>
+<meta name="description" content="Updates for Halos, the tool wheel for After Effects by Aru Animator.">
+<link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #121113; --panel: #1b1a1c; --edge: rgba(255,255,255,0.08); --text: #f2efec; --muted: #a39e99; --faint: #6f6a66;
+  --accent: #e8541a; --accent-2: #ff7a3d;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font-family: "Instrument Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; }
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 16px; }
+header { padding: 28px 0; display: flex; align-items: center; gap: 12px; }
+header img { width: 34px; height: 34px; }
+header b { font-size: 18px; font-weight: 600; }
+header span { color: var(--faint); font-size: 14px; }
+.hero { padding: 64px 0 40px; display: grid; gap: 18px; }
+.hero h1 { margin: 0; font-size: clamp(34px, 6vw, 56px); line-height: 1.04; font-weight: 600; letter-spacing: -0.02em; text-wrap: balance; }
+.hero h1 em { font-style: normal; color: var(--accent); }
+.hero p { margin: 0; color: var(--muted); font-size: 17px; line-height: 1.55; max-width: 600px; }
+.card { background: var(--panel); border: 1px solid var(--edge); border-radius: 16px; padding: 22px; }
+.latest { display: grid; gap: 16px; margin: 8px 0 48px; }
+.latest .top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.latest h2 { margin: 0; font-size: 22px; font-weight: 600; }
+.latest .date { color: var(--faint); font-size: 14px; font-variant-numeric: tabular-nums; }
+ul.notes { margin: 0; padding-left: 18px; color: var(--muted); line-height: 1.7; }
+.dl { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; height: 42px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--edge); background: #242226; color: var(--text); text-decoration: none; font-weight: 500; font-size: 15px; transition: background-color 140ms ease, transform 140ms ease; }
+.btn:hover { background: #2d2a2f; }
+.btn:active { transform: scale(0.98); }
+.btn.primary { background: var(--accent); border-color: transparent; color: #fff; }
+.btn.primary:hover { background: var(--accent-2); }
+.btn[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+.btn small { color: inherit; opacity: 0.7; font-weight: 400; }
+.how { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 48px; }
+.how .card h3 { margin: 0 0 8px; font-size: 15px; font-weight: 600; }
+.how .card p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.55; }
+.how .n { display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: rgba(232,84,26,0.14); color: var(--accent-2); font-size: 13px; font-weight: 600; margin-bottom: 12px; }
+h2.sec { font-size: 15px; font-weight: 600; color: var(--muted); margin: 0 0 12px; letter-spacing: 0.02em; }
+.hist { display: grid; gap: 10px; margin-bottom: 64px; }
+.hist .card { padding: 16px 18px; }
+.hist .row { display: flex; justify-content: space-between; gap: 12px; }
+.hist b { font-weight: 600; }
+footer { border-top: 1px solid var(--edge); padding: 24px 0 40px; color: var(--faint); font-size: 13px; }
+.empty { color: var(--faint); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><img src="logo.svg" alt=""><b>Halos</b><span>by Aru Animator</span></header>
+
+  <section class="hero">
+    <h1>Halos updates itself, <em>inside After Effects.</em></h1>
+    <p>When a new version is out, Halos shows "Download update" in its panel. Click it, close After Effects, and the update installs. Your settings, saved expressions, library and licence stay as they are.</p>
+  </section>
+
+  <section class="card latest" id="latest" aria-live="polite">
+    <div class="top"><h2 id="ver">Latest version</h2><span class="date" id="date"></span></div>
+    <ul class="notes" id="notes"><li class="empty">Loading…</li></ul>
+    <div class="dl">
+      <a class="btn primary" id="win" aria-disabled="true" href="#">Windows update <small id="winSize"></small></a>
+      <a class="btn" id="mac" aria-disabled="true" href="#">Mac update <small id="macSize"></small></a>
+    </div>
+  </section>
+
+  <section class="how" aria-label="How updating works">
+    <div class="card"><div class="n">1</div><h3>Halos checks once a day</h3><p>Or open Window &gt; Extensions &gt; Halos &gt; Settings and click Check now.</p></div>
+    <div class="card"><div class="n">2</div><h3>Click Download update</h3><p>The download happens inside After Effects. There's nothing to find or unzip.</p></div>
+    <div class="card"><div class="n">3</div><h3>Close After Effects</h3><p>On Windows the update installs as soon as After Effects closes. On Mac the installer opens; click through it.</p></div>
+  </section>
+
+  <h2 class="sec">Earlier versions</h2>
+  <section class="hist" id="hist"><div class="card empty">No earlier versions yet.</div></section>
+
+  <footer>Updates need Halos already installed and activated. To buy Halos, visit the Aru Animator page on SupportKori.</footer>
+</div>
+<script>
+(function () {
+  function mb(b) { return b ? Math.round(b / 1048576) + " MB" : ""; }
+  function el(t, txt) { var e = document.createElement(t); if (txt) e.textContent = txt; return e; }
+  fetch("latest.json", { cache: "no-store" }).then(function (r) { return r.json(); }).then(function (m) {
+    document.getElementById("ver").textContent = "Halos " + m.version;
+    document.getElementById("date").textContent = m.date || "";
+    var ul = document.getElementById("notes"); ul.innerHTML = "";
+    (m.notes || []).forEach(function (n) { ul.appendChild(el("li", n)); });
+    [["win", m.win], ["mac", m.mac]].forEach(function (p) {
+      var a = document.getElementById(p[0]);
+      if (p[1] && p[1].url) { a.href = p[1].url; a.removeAttribute("aria-disabled"); document.getElementById(p[0] + "Size").textContent = mb(p[1].size); }
+    });
+    var h = document.getElementById("hist"), past = (m.history || []).filter(function (x) { return x.version !== m.version; });
+    if (past.length) h.innerHTML = "";
+    past.forEach(function (x) {
+      var c = el("div"); c.className = "card";
+      var row = el("div"); row.className = "row"; row.appendChild(el("b", "Halos " + x.version)); var d = el("span", x.date || ""); d.className = "date"; row.appendChild(d);
+      c.appendChild(row);
+      var u = el("ul"); u.className = "notes"; (x.notes || []).forEach(function (n) { u.appendChild(el("li", n)); }); c.appendChild(u);
+      h.appendChild(c);
+    });
+  }).catch(function () { document.getElementById("notes").innerHTML = '<li class="empty">Couldn\'t load the latest version.</li>'; });
+})();
+</script>
+</body>
+</html>

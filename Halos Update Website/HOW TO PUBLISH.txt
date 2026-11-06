@@ -1,0 +1,38 @@
+HALOS UPDATE WEBSITE
+====================
+
+This folder is the whole update website. Every installed copy of Halos reads
+latest.json from it once a day:  https://halos-updates.pages.dev/latest.json
+
+ONE-TIME SETUP (free)
+1. Make a free Cloudflare account, then go to Workers & Pages > Create > Pages >
+   "Upload assets" (Direct Upload).
+2. Name the project:  halos-updates
+   (If that name is taken, tell Claude the address Cloudflare gives you, and
+   Halos will be rebuilt to check that address instead.)
+3. Upload this folder. The site is live at https://halos-updates.pages.dev
+
+4. Make a free GitHub account and a public repository, e.g. "halos-updates".
+   The update installers (50-100 MB) are kept on its Releases page, because
+   Cloudflare Pages only takes files up to 25 MB.
+
+PUBLISHING AN UPDATE (e.g. 1.4.2)
+1. On GitHub: Releases > Draft a new release > tag v1.4.2 > attach
+   "Halos 1.4.2 Update.exe" and "Halos 1.4.2 Update.pkg" > Publish.
+2. Right-click each attached file > Copy link.
+3. Run (in this folder):
+     python3 publish_update.py 1.4.2 "What changed" "Another change" ^
+       --win <exe link> --mac <pkg link> ^
+       --win-file "Halos 1.4.2 Update.exe" --mac-file "Halos 1.4.2 Update.pkg"
+   (On Mac use \ instead of ^ at the line ends.)
+4. In Cloudflare, open the halos-updates project > Create deployment, and upload
+   this folder again.
+
+Within a day, every open Halos shows "Halos 1.4.2 is available - Download update".
+Users can also click Settings > Updates > Check now.
+
+FILES
+  index.html          the public page (latest version, notes, download links)
+  latest.json         what Halos reads: version, notes, and the Windows and Mac update links
+  _headers            stops latest.json being cached, so updates show up at once
+  publish_update.py   updates latest.json for a new version
